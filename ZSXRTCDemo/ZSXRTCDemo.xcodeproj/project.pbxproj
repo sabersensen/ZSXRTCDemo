@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		69853ADA20849B6C00C38074 /* ZSXSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69853AD920849B6C00C38074 /* ZSXSocketManager.m */; };
+		69BADBE1208444AC007B1ACD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBE0208444AC007B1ACD /* AppDelegate.m */; };
+		69BADBE4208444AC007B1ACD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBE3208444AC007B1ACD /* ViewController.m */; };
+		69BADBE7208444AC007B1ACD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBE5208444AC007B1ACD /* Main.storyboard */; };
+		69BADBE9208444AC007B1ACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBE8208444AC007B1ACD /* Assets.xcassets */; };
+		69BADBEC208444AC007B1ACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBEA208444AC007B1ACD /* LaunchScreen.storyboard */; };
+		69BADBEF208444AC007B1ACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBEE208444AC007B1ACD /* main.m */; };
+		E66571BF7F7A1E929EFD5CE1 /* libPods-ZSXRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6332193C8B79921B70446212 /* libPods-ZSXRTCDemo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6332193C8B79921B70446212 /* libPods-ZSXRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZSXRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69853AD820849B6C00C38074 /* ZSXSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXSocketManager.h; sourceTree = "<group>"; };
+		69853AD920849B6C00C38074 /* ZSXSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXSocketManager.m; sourceTree = "<group>"; };
+		69BADBDC208444AC007B1ACD /* ZSXRTCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZSXRTCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69BADBDF208444AC007B1ACD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		69BADBE0208444AC007B1ACD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		69BADBE2208444AC007B1ACD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		69BADBE3208444AC007B1ACD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		69BADBE6208444AC007B1ACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		69BADBE8208444AC007B1ACD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		69BADBEB208444AC007B1ACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		69BADBED208444AC007B1ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69BADBEE208444AC007B1ACD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AD1A16CCD2EB7683C5FB6EF0 /* Pods-ZSXRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZSXRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		FAA7898EF216CC4806446564 /* Pods-ZSXRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZSXRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69BADBD9208444AC007B1ACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E66571BF7F7A1E929EFD5CE1 /* libPods-ZSXRTCDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69BADBD3208444AC007B1ACD = {
+			isa = PBXGroup;
+			children = (
+				69BADBDE208444AC007B1ACD /* ZSXRTCDemo */,
+				69BADBDD208444AC007B1ACD /* Products */,
+				A1173008EDB682AF0833ACF1 /* Pods */,
+				7E9E4AA39A801B3B6F9AAF21 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		69BADBDD208444AC007B1ACD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69BADBDC208444AC007B1ACD /* ZSXRTCDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69BADBDE208444AC007B1ACD /* ZSXRTCDemo */ = {
+			isa = PBXGroup;
+			children = (
+				69BADBDF208444AC007B1ACD /* AppDelegate.h */,
+				69BADBE0208444AC007B1ACD /* AppDelegate.m */,
+				69BADBE2208444AC007B1ACD /* ViewController.h */,
+				69BADBE3208444AC007B1ACD /* ViewController.m */,
+				69BADBE5208444AC007B1ACD /* Main.storyboard */,
+				69BADBE8208444AC007B1ACD /* Assets.xcassets */,
+				69BADBEA208444AC007B1ACD /* LaunchScreen.storyboard */,
+				69BADBED208444AC007B1ACD /* Info.plist */,
+				69BADBEE208444AC007B1ACD /* main.m */,
+				69853AD820849B6C00C38074 /* ZSXSocketManager.h */,
+				69853AD920849B6C00C38074 /* ZSXSocketManager.m */,
+			);
+			path = ZSXRTCDemo;
+			sourceTree = "<group>";
+		};
+		7E9E4AA39A801B3B6F9AAF21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6332193C8B79921B70446212 /* libPods-ZSXRTCDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1173008EDB682AF0833ACF1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD1A16CCD2EB7683C5FB6EF0 /* Pods-ZSXRTCDemo.debug.xcconfig */,
+				FAA7898EF216CC4806446564 /* Pods-ZSXRTCDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69BADBDB208444AC007B1ACD /* ZSXRTCDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69BADBF2208444AC007B1ACD /* Build configuration list for PBXNativeTarget "ZSXRTCDemo" */;
+			buildPhases = (
+				881D1EF2AE9DE90BFA41AA5E /* [CP] Check Pods Manifest.lock */,
+				69BADBD8208444AC007B1ACD /* Sources */,
+				69BADBD9208444AC007B1ACD /* Frameworks */,
+				69BADBDA208444AC007B1ACD /* Resources */,
+				41039220A9006822347AC088 /* [CP] Embed Pods Frameworks */,
+				98194FA7CF9FF8D037AEFE4C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZSXRTCDemo;
+			productName = ZSXRTCDemo;
+			productReference = 69BADBDC208444AC007B1ACD /* ZSXRTCDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69BADBD4208444AC007B1ACD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = zoushixin;
+				TargetAttributes = {
+					69BADBDB208444AC007B1ACD = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 69BADBD7208444AC007B1ACD /* Build configuration list for PBXProject "ZSXRTCDemo" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69BADBD3208444AC007B1ACD;
+			productRefGroup = 69BADBDD208444AC007B1ACD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69BADBDB208444AC007B1ACD /* ZSXRTCDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69BADBDA208444AC007B1ACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69BADBEC208444AC007B1ACD /* LaunchScreen.storyboard in Resources */,
+				69BADBE9208444AC007B1ACD /* Assets.xcassets in Resources */,
+				69BADBE7208444AC007B1ACD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41039220A9006822347AC088 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo-frameworks.sh",
+				"${PODS_ROOT}/GoogleWebRTC/Frameworks/frameworks/WebRTC.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		881D1EF2AE9DE90BFA41AA5E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZSXRTCDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98194FA7CF9FF8D037AEFE4C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69BADBD8208444AC007B1ACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69BADBE4208444AC007B1ACD /* ViewController.m in Sources */,
+				69BADBEF208444AC007B1ACD /* main.m in Sources */,
+				69853ADA20849B6C00C38074 /* ZSXSocketManager.m in Sources */,
+				69BADBE1208444AC007B1ACD /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		69BADBE5208444AC007B1ACD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69BADBE6208444AC007B1ACD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		69BADBEA208444AC007B1ACD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69BADBEB208444AC007B1ACD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69BADBF0208444AC007B1ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		69BADBF1208444AC007B1ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		69BADBF3208444AC007B1ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD1A16CCD2EB7683C5FB6EF0 /* Pods-ZSXRTCDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JX333254R3;
+				INFOPLIST_FILE = ZSXRTCDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jike.ZSXRTCDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		69BADBF4208444AC007B1ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAA7898EF216CC4806446564 /* Pods-ZSXRTCDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JX333254R3;
+				INFOPLIST_FILE = ZSXRTCDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jike.ZSXRTCDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69BADBD7208444AC007B1ACD /* Build configuration list for PBXProject "ZSXRTCDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69BADBF0208444AC007B1ACD /* Debug */,
+				69BADBF1208444AC007B1ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69BADBF2208444AC007B1ACD /* Build configuration list for PBXNativeTarget "ZSXRTCDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69BADBF3208444AC007B1ACD /* Debug */,
+				69BADBF4208444AC007B1ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69BADBD4208444AC007B1ACD /* Project object */;
+}
