@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEm-m4-ydW">
-                                <rect key="frame" x="172" y="134" width="31" height="30"/>
+                                <rect key="frame" x="172" y="456" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="发送"/>
                                 <connections>
@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azG-Qw-L9F">
-                                <rect key="frame" x="172" y="240" width="31" height="30"/>
+                                <rect key="frame" x="53" y="514" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="连接"/>
                                 <connections>
@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-d8-vmW">
-                                <rect key="frame" x="172" y="288" width="31" height="30"/>
+                                <rect key="frame" x="291" y="514" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="断开"/>
                                 <connections>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="填写发送内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BV0-yB-fNh">
-                                <rect key="frame" x="53" y="55" width="269" height="30"/>
+                                <rect key="frame" x="53" y="402" width="269" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

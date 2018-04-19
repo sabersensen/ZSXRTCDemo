@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		69853ADA20849B6C00C38074 /* ZSXSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69853AD920849B6C00C38074 /* ZSXSocketManager.m */; };
+		698D801B2088634E00D7C7E3 /* ARDSettingsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 698D80142088634C00D7C7E3 /* ARDSettingsStore.m */; };
+		698D801C2088634E00D7C7E3 /* ARDCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698D80152088634D00D7C7E3 /* ARDCaptureController.m */; };
+		698D801D2088634E00D7C7E3 /* ARDSettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 698D80172088634D00D7C7E3 /* ARDSettingsModel.m */; };
 		69BADBE1208444AC007B1ACD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBE0208444AC007B1ACD /* AppDelegate.m */; };
 		69BADBE4208444AC007B1ACD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBE3208444AC007B1ACD /* ViewController.m */; };
 		69BADBE7208444AC007B1ACD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBE5208444AC007B1ACD /* Main.storyboard */; };
 		69BADBE9208444AC007B1ACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBE8208444AC007B1ACD /* Assets.xcassets */; };
 		69BADBEC208444AC007B1ACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BADBEA208444AC007B1ACD /* LaunchScreen.storyboard */; };
 		69BADBEF208444AC007B1ACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BADBEE208444AC007B1ACD /* main.m */; };
+		69F03CAC2084BEF900A99A72 /* ZSXCocoaSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F03CAB2084BEF900A99A72 /* ZSXCocoaSocketManager.m */; };
+		69F03CAF2086E93200A99A72 /* ZSXWebSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F03CAE2086E93200A99A72 /* ZSXWebSocketManager.m */; };
+		69F03CB22087364600A99A72 /* ZSXDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F03CB12087364600A99A72 /* ZSXDemoViewController.m */; };
+		69F03CB520873A4900A99A72 /* ZSXDemoSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F03CB420873A4900A99A72 /* ZSXDemoSocketManager.m */; };
 		E66571BF7F7A1E929EFD5CE1 /* libPods-ZSXRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6332193C8B79921B70446212 /* libPods-ZSXRTCDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +28,13 @@
 		6332193C8B79921B70446212 /* libPods-ZSXRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZSXRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69853AD820849B6C00C38074 /* ZSXSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXSocketManager.h; sourceTree = "<group>"; };
 		69853AD920849B6C00C38074 /* ZSXSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXSocketManager.m; sourceTree = "<group>"; };
+		698D80142088634C00D7C7E3 /* ARDSettingsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSettingsStore.m; sourceTree = "<group>"; };
+		698D80152088634D00D7C7E3 /* ARDCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDCaptureController.m; sourceTree = "<group>"; };
+		698D80162088634D00D7C7E3 /* ARDSettingsModel+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARDSettingsModel+Private.h"; sourceTree = "<group>"; };
+		698D80172088634D00D7C7E3 /* ARDSettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSettingsModel.m; sourceTree = "<group>"; };
+		698D80182088634D00D7C7E3 /* ARDCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDCaptureController.h; sourceTree = "<group>"; };
+		698D80192088634D00D7C7E3 /* ARDSettingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSettingsModel.h; sourceTree = "<group>"; };
+		698D801A2088634D00D7C7E3 /* ARDSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSettingsStore.h; sourceTree = "<group>"; };
 		69BADBDC208444AC007B1ACD /* ZSXRTCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZSXRTCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BADBDF208444AC007B1ACD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69BADBE0208444AC007B1ACD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -31,6 +45,14 @@
 		69BADBEB208444AC007B1ACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69BADBED208444AC007B1ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69BADBEE208444AC007B1ACD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		69F03CAA2084BEF900A99A72 /* ZSXCocoaSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXCocoaSocketManager.h; sourceTree = "<group>"; };
+		69F03CAB2084BEF900A99A72 /* ZSXCocoaSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXCocoaSocketManager.m; sourceTree = "<group>"; };
+		69F03CAD2086E93200A99A72 /* ZSXWebSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXWebSocketManager.h; sourceTree = "<group>"; };
+		69F03CAE2086E93200A99A72 /* ZSXWebSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXWebSocketManager.m; sourceTree = "<group>"; };
+		69F03CB02087364600A99A72 /* ZSXDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXDemoViewController.h; sourceTree = "<group>"; };
+		69F03CB12087364600A99A72 /* ZSXDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXDemoViewController.m; sourceTree = "<group>"; };
+		69F03CB320873A4900A99A72 /* ZSXDemoSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSXDemoSocketManager.h; sourceTree = "<group>"; };
+		69F03CB420873A4900A99A72 /* ZSXDemoSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSXDemoSocketManager.m; sourceTree = "<group>"; };
 		AD1A16CCD2EB7683C5FB6EF0 /* Pods-ZSXRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZSXRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		FAA7898EF216CC4806446564 /* Pods-ZSXRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZSXRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZSXRTCDemo/Pods-ZSXRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +94,8 @@
 				69BADBE0208444AC007B1ACD /* AppDelegate.m */,
 				69BADBE2208444AC007B1ACD /* ViewController.h */,
 				69BADBE3208444AC007B1ACD /* ViewController.m */,
+				69F03CB02087364600A99A72 /* ZSXDemoViewController.h */,
+				69F03CB12087364600A99A72 /* ZSXDemoViewController.m */,
 				69BADBE5208444AC007B1ACD /* Main.storyboard */,
 				69BADBE8208444AC007B1ACD /* Assets.xcassets */,
 				69BADBEA208444AC007B1ACD /* LaunchScreen.storyboard */,
@@ -79,6 +103,19 @@
 				69BADBEE208444AC007B1ACD /* main.m */,
 				69853AD820849B6C00C38074 /* ZSXSocketManager.h */,
 				69853AD920849B6C00C38074 /* ZSXSocketManager.m */,
+				69F03CAA2084BEF900A99A72 /* ZSXCocoaSocketManager.h */,
+				69F03CAB2084BEF900A99A72 /* ZSXCocoaSocketManager.m */,
+				69F03CAD2086E93200A99A72 /* ZSXWebSocketManager.h */,
+				69F03CAE2086E93200A99A72 /* ZSXWebSocketManager.m */,
+				69F03CB320873A4900A99A72 /* ZSXDemoSocketManager.h */,
+				69F03CB420873A4900A99A72 /* ZSXDemoSocketManager.m */,
+				698D80182088634D00D7C7E3 /* ARDCaptureController.h */,
+				698D80152088634D00D7C7E3 /* ARDCaptureController.m */,
+				698D80192088634D00D7C7E3 /* ARDSettingsModel.h */,
+				698D80172088634D00D7C7E3 /* ARDSettingsModel.m */,
+				698D80162088634D00D7C7E3 /* ARDSettingsModel+Private.h */,
+				698D801A2088634D00D7C7E3 /* ARDSettingsStore.h */,
+				698D80142088634C00D7C7E3 /* ARDSettingsStore.m */,
 			);
 			path = ZSXRTCDemo;
 			sourceTree = "<group>";
@@ -230,8 +267,15 @@
 			files = (
 				69BADBE4208444AC007B1ACD /* ViewController.m in Sources */,
 				69BADBEF208444AC007B1ACD /* main.m in Sources */,
+				69F03CB22087364600A99A72 /* ZSXDemoViewController.m in Sources */,
+				69F03CAC2084BEF900A99A72 /* ZSXCocoaSocketManager.m in Sources */,
+				698D801B2088634E00D7C7E3 /* ARDSettingsStore.m in Sources */,
+				69F03CAF2086E93200A99A72 /* ZSXWebSocketManager.m in Sources */,
 				69853ADA20849B6C00C38074 /* ZSXSocketManager.m in Sources */,
 				69BADBE1208444AC007B1ACD /* AppDelegate.m in Sources */,
+				698D801C2088634E00D7C7E3 /* ARDCaptureController.m in Sources */,
+				69F03CB520873A4900A99A72 /* ZSXDemoSocketManager.m in Sources */,
+				698D801D2088634E00D7C7E3 /* ARDSettingsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX333254R3;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZSXRTCDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jike.ZSXRTCDemo;
@@ -383,6 +428,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX333254R3;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZSXRTCDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jike.ZSXRTCDemo;
