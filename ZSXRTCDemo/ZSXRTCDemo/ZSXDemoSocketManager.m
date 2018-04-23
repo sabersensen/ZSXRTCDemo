@@ -17,12 +17,12 @@ block();\
 dispatch_async(dispatch_get_main_queue(), block);\
 }
 
-static  NSString * Khost = @"192.168.15.31";
+static  NSString * Khost = @"10.0.3.220";
 static const uint16_t Kport = 6969;
 static  NSString * KroomName = @"zsx";
 
 
-@interface ZSXDemoSocketManager()<GCDAsyncSocketDelegate,RTCVideoCapturerDelegate>
+@interface ZSXDemoSocketManager()<GCDAsyncSocketDelegate,RTCVideoCapturerDelegate,RTCPeerConnectionDelegate>
 {
     GCDAsyncSocket *gcdSocket;
     RTCPeerConnectionFactory *_factory; //点对点工厂
@@ -30,6 +30,14 @@ static  NSString * KroomName = @"zsx";
     RTCMediaStream *_localStream;
 }
 
+/**
+ ip
+ */
+@property (nonatomic,strong)NSMutableArray *connectionIdArray;
+@property (nonatomic,strong)NSMutableDictionary *connectionDic;
+@property (nonatomic,strong)NSMutableArray<RTCIceServer *> *ICEServers;
+@property (nonatomic,strong)RTCPeerConnection *peerConnection;
+@property (nonatomic,strong)RTCVideoTrack *_localvideoTrack;
 @end
 
 @implementation ZSXDemoSocketManager
@@ -56,6 +64,7 @@ static  NSString * KroomName = @"zsx";
 //建立连接
 - (BOOL)connect
 {
+//    BOOL isConnectSuccess = [gcdSocket acceptOnPort:Kport error:nil];
     BOOL isConnectSuccess = [gcdSocket connectToHost:Khost onPort:Kport error:nil];
     if (isConnectSuccess) {
         [self joinRoom:KroomName];
@@ -84,7 +93,9 @@ static  NSString * KroomName = @"zsx";
 - (void)sendMsg:(NSString *)msg
 
 {
-    NSData *data  = [msg dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dic = @{@"eventName": @"__sendMsg", @"content": msg};
+    //得到json的data
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     //第二个参数，请求超时时间
     [gcdSocket writeData:data withTimeout:-1 tag:110];
     
@@ -139,24 +150,98 @@ static  NSString * KroomName = @"zsx";
     
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     NSString *eventName = dic[@"eventName"];
-    if ([eventName isEqualToString:@"__peers"])
+    if ([eventName isEqualToString:@"_peers"])
     {
         //得到data
         NSDictionary *dataDic = dic[@"data"];
         //得到所有的连接
         NSArray *connections = dataDic[@"connections"];
+//        [self.connectionIdArray addObjectsFromArray:connections];
         //拿到给自己分配的ID
         _myId = dataDic[@"you"];
         if (!_factory) {
+            RTCInitializeSSL();
+            RTCDefaultVideoDecoderFactory *decoderFactory = [[RTCDefaultVideoDecoderFactory alloc] init];
+            RTCDefaultVideoEncoderFactory *encoderFactory = [[RTCDefaultVideoEncoderFactory alloc] init];
+            ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
+            encoderFactory.preferredCodec = [settingsModel currentVideoCodecSettingFromStore];
             _factory = [[RTCPeerConnectionFactory alloc] init];
         }
         if (!_localStream) {
             [self createLocalStream];
         }
+//        //创建连接
+//        [self createPeerConnections];
+//        // 添加
+//        [self addStreams];
+//
+//        [self createOffers];
+        [self createLocalPeerConnections];
+        
+        [self createLocalOffer];
 
     }
     [self pullTheMsg];
 }
+
+- (void)createLocalPeerConnections{
+    RTCIceServer *service = [[RTCIceServer alloc] initWithURLStrings:self.connectionIdArray];
+//    [self.ICEServers addObject:service];
+    //用工厂来创建连接
+    //    RTCPeerConnection *connection = [_factory peerConnectionWithICEServers:ICEServers constraints:[self peerConnectionConstraints] delegate:self];
+    RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
+    RTCConfiguration *config = [[RTCConfiguration alloc] init];
+    
+    config.iceServers = self.ICEServers;
+//    config.sdpSemantics = RTCSdpSemanticsDefault;
+    self.peerConnection = [_factory peerConnectionWithConfiguration:config constraints:constraints delegate:self];
+    [self createMediaSenders];
+};
+
+- (void)createLocalOffer{
+    
+    [self.peerConnection offerForConstraints:[self defaultOfferConstraints] completionHandler:^(RTCSessionDescription * _Nullable sdp, NSError * _Nullable error) {
+        
+    }];
+
+}
+
+- (void)createMediaSenders {
+    RTCVideoTrack *track = (RTCVideoTrack *)([self videoTransceiver].receiver.track);
+    [_delegate socketManager:self didReceiveRemoteVideoTrack:track];
+}
+
+- (RTCRtpTransceiver *)videoTransceiver {
+    for (RTCRtpTransceiver *transceiver in _peerConnection.transceivers) {
+        if (transceiver.mediaType == RTCRtpMediaTypeVideo) {
+            return transceiver;
+        }
+    }
+    return nil;
+}
+
+- (RTCMediaConstraints *)defaultMediaAudioConstraints {
+    NSDictionary *mandatoryConstraints = @{};
+    RTCMediaConstraints *constraints =
+    [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatoryConstraints
+                                          optionalConstraints:nil];
+    return constraints;
+}
+
+
+- (RTCMediaConstraints *)defaultOfferConstraints {
+    NSDictionary *mandatoryConstraints = @{
+                                           @"OfferToReceiveAudio" : @"true",
+                                           @"OfferToReceiveVideo" : @"true"
+                                           };
+    RTCMediaConstraints* constraints =
+    [[RTCMediaConstraints alloc]
+     initWithMandatoryConstraints:mandatoryConstraints
+     optionalConstraints:nil];
+    return constraints;
+}
+
+
 
 //分段去获取消息的回调
 //- (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
@@ -175,7 +260,7 @@ static  NSString * KroomName = @"zsx";
 
 - (void)createLocalStream{
     _localStream = [_factory mediaStreamWithStreamId:@"ARDAMS"];
-    //音频
+    //添加音频轨迹
     RTCAudioTrack *audioTrack = [_factory audioTrackWithTrackId:@"ARDAMSa0"];
     [_localStream addAudioTrack:audioTrack];
     //视频
@@ -199,16 +284,15 @@ static  NSString * KroomName = @"zsx";
             RTCVideoSource *videoSource = [_factory videoSource];
             [videoSource adaptOutputFormatToWidth:1280 height:720 fps:60];
             RTCCameraVideoCapturer *video = [[RTCCameraVideoCapturer alloc] initWithDelegate:videoSource];
-            ARDSettingsModel *settingModel = [[ARDSettingsModel alloc] init];
-            
-            ARDCaptureController *controller = [[ARDCaptureController alloc] initWithCapturer:video settings:settingModel];
-            [controller startCapture];
-//            NSArray *arr = [RTCCameraVideoCapturer supportedFormatsForDevice:device];
-//            [video startCaptureWithDevice:device format:format fps:fps];
+           
+            if ([_delegate respondsToSelector:@selector(socketManager:didCreateLocalCapturer:)]) {
+                [_delegate socketManager:self didCreateLocalCapturer:video];
+            }
 
+            //添加视频轨迹
             RTCVideoTrack *videoTrack = [_factory videoTrackWithSource:videoSource trackId:@"ARDAMSv0"];
-
             [_localStream addVideoTrack:videoTrack];
+            
             if ([_delegate respondsToSelector:@selector(socketManager:setLocalStream:userId:)])
             {
                 [_delegate socketManager:self setLocalStream:_localStream userId:_myId];
@@ -226,7 +310,181 @@ static  NSString * KroomName = @"zsx";
     }
 }
 
+
+/**
+ 创建点对点
+ */
+- (void)createPeerConnections{
+    
+    [_connectionIdArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //根据连接ID去初始化 RTCPeerConnection 连接对象
+        RTCPeerConnection *connection = [self createPeerConnection:obj];
+        //设置这个ID对应的 RTCPeerConnection对象
+        [self.connectionDic setObject:connection forKey:obj];
+    }];
+}
+
+
+/**
+ 给对方 添加本地流
+ */
+- (void)addStreams{
+    [_connectionDic enumerateKeysAndObjectsUsingBlock:^(NSString *key, RTCPeerConnection *obj, BOOL * _Nonnull stop) {
+        if (!_localStream)
+        {
+            [self createLocalStream];
+        }
+        [obj addStream:_localStream];
+    }];
+}
+
+
+/**
+ 创建房间
+ */
+- (void)createOffers{
+    //给每一个点对点连接，都去创建offer
+    [_connectionDic enumerateKeysAndObjectsUsingBlock:^(NSString *key, RTCPeerConnection *obj, BOOL * _Nonnull stop) {
+//        _currentId = key;
+//        _role = RoleCaller;
+//        [obj createOfferWithDelegate:self constraints:[self offerOranswerConstraint]];
+    }];
+}
+
+
+/**
+ 创建点对点
+
+ @param connectionId 用户id 暂且用ip作为id
+ @return RTCPeerConnection
+ */
+- (RTCPeerConnection *)createPeerConnection:(NSString *)connectionId
+{
+    //如果点对点工厂为空
+    if (!_factory)
+    {
+        //先初始化工厂
+        RTCInitializeSSL();
+        _factory = [[RTCPeerConnectionFactory alloc] init];
+    }
+    
+    
+    RTCIceServer *service = [[RTCIceServer alloc] initWithURLStrings:self.connectionIdArray];
+    [self.ICEServers addObject:service];
+    //用工厂来创建连接
+//    RTCPeerConnection *connection = [_factory peerConnectionWithICEServers:ICEServers constraints:[self peerConnectionConstraints] delegate:self];
+    RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
+    RTCConfiguration *config = [[RTCConfiguration alloc] init];
+    
+    config.iceServers = self.ICEServers;
+    config.sdpSemantics = RTCSdpSemanticsUnifiedPlan;
+    RTCPeerConnection *connection = [_factory peerConnectionWithConfiguration:config constraints:constraints delegate:self];
+    return connection;
+}
+
 - (void)capturer:(RTCVideoCapturer *)capturer didCaptureVideoFrame:(RTCVideoFrame *)frame{
     
+}
+
+#pragma mark - RTCPeerConnectionDelegate
+// Callbacks for this delegate occur on non-main thread and need to be
+// dispatched back to main queue as needed.
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didChangeSignalingState:(RTCSignalingState)stateChanged {
+    RTCLog(@"Signaling state changed: %ld", (long)stateChanged);
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+          didAddStream:(RTCMediaStream *)stream {
+    RTCLog(@"Stream with %lu video tracks and %lu audio tracks was added.",
+           (unsigned long)stream.videoTracks.count,
+           (unsigned long)stream.audioTracks.count);
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didStartReceivingOnTransceiver:(RTCRtpTransceiver *)transceiver {
+    RTCMediaStreamTrack *track = transceiver.receiver.track;
+    RTCLog(@"Now receiving %@ on track %@.", track.kind, track.trackId);
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+       didRemoveStream:(RTCMediaStream *)stream {
+    RTCLog(@"Stream was removed.");
+}
+
+- (void)peerConnectionShouldNegotiate:(RTCPeerConnection *)peerConnection {
+    RTCLog(@"WARNING: Renegotiation needed but unimplemented.");
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didChangeIceConnectionState:(RTCIceConnectionState)newState {
+    RTCLog(@"ICE state changed: %ld", (long)newState);
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [_delegate appClient:self didChangeConnectionState:newState];
+//    });
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didChangeIceGatheringState:(RTCIceGatheringState)newState {
+    RTCLog(@"ICE gathering state changed: %ld", (long)newState);
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didGenerateIceCandidate:(RTCIceCandidate *)candidate {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        ARDICECandidateMessage *message =
+//        [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
+//        [self sendSignalingMessage:message];
+//    });
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+didRemoveIceCandidates:(NSArray<RTCIceCandidate *> *)candidates {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        ARDICECandidateRemovalMessage *message =
+//        [[ARDICECandidateRemovalMessage alloc]
+//         initWithRemovedCandidates:candidates];
+//        [self sendSignalingMessage:message];
+//    });
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+    didOpenDataChannel:(RTCDataChannel *)dataChannel {
+}
+
+
+#pragma mark - Getter and Setter
+
+- (NSMutableArray *)connectionIdArray{
+    if (!_connectionIdArray) {
+        _connectionIdArray = [NSMutableArray new];
+    }
+    return _connectionIdArray;
+}
+
+- (NSMutableDictionary *)connectionDic{
+    if (!_connectionDic) {
+        _connectionDic = [NSMutableDictionary dictionary];
+    }
+    return _connectionDic;
+}
+
+- (NSMutableArray *)ICEServers{
+    if (!_ICEServers) {
+        _ICEServers = [NSMutableArray array];
+    }
+    return _ICEServers;
+}
+
+- (RTCMediaConstraints *)defaultPeerConnectionConstraints {
+    NSDictionary *mandatoryConstraints = @{@"OfferToReceiveAudio":@true,@"OfferToReceiveVideo":@true};
+    NSDictionary *optionalConstraints = @{ @"DtlsSrtpKeyAgreement":@false };
+    RTCMediaConstraints* constraints =
+    [[RTCMediaConstraints alloc]
+     initWithMandatoryConstraints:mandatoryConstraints
+     optionalConstraints:optionalConstraints];
+    
+    return constraints;
 }
 @end

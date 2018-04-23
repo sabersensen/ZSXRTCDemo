@@ -15,7 +15,8 @@
 - (void)socketManager:(ZSXDemoSocketManager *)manager setLocalStream:(RTCMediaStream *)stream userId:(NSString *)userId;
 - (void)socketManager:(ZSXDemoSocketManager *)manager addRemoteStream:(RTCMediaStream *)stream userId:(NSString *)userId;
 - (void)socketManager:(ZSXDemoSocketManager *)manager closeWithUserId:(NSString *)userId;
-
+- (void)socketManager:(ZSXDemoSocketManager *)manager didCreateLocalCapturer:(RTCCameraVideoCapturer *)localCapturer;
+- (void)socketManager:(ZSXDemoSocketManager *)manager didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 @end
 
 

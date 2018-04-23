@@ -10,7 +10,9 @@
 #import "ZSXSocketManager.h"
 #import "ZSXCocoaSocketManager.h"
 #import "ZSXDemoSocketManager.h"
-
+#import <WebRTC/WebRTC.h>
+#import "ARDCaptureController.h"
+#import "ARDSettingsModel.h"
 @interface ViewController ()<UITextFieldDelegate,ZSXDemoSocketManagerDelegate>
 
 
@@ -21,7 +23,9 @@
 @property (nonatomic,strong)ZSXDemoSocketManager *demoSocketManager;
 
 @property (nonatomic,strong)RTCVideoTrack *localVideoTrack;
+@property (nonatomic,strong)RTCCameraPreviewView *localVideoView;
 
+@property(nonatomic, strong) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
 @end
 
 @implementation ViewController
@@ -68,15 +72,26 @@
 #pragma mark -
 
 - (void)socketManager:(ZSXDemoSocketManager *)manager setLocalStream:(RTCMediaStream *)stream userId:(NSString *)userId{
-    RTCEAGLVideoView *localVideoView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-    //标记本地的摄像头
-    localVideoView.tag = 100;
-    _localVideoTrack = [stream.videoTracks lastObject];
-    [_localVideoTrack addRenderer:localVideoView];
     
-    [self.view addSubview:localVideoView];
+    //标记本地的摄像头
+//    _localVideoView.tag = 100;
+//    _localVideoTrack = [stream.videoTracks lastObject];
+//    [_localVideoTrack addRenderer:_localVideoView];
+    
+    [self.view addSubview:_localVideoView];
     
     NSLog(@"setLocalStream");
+}
+
+- (void)socketManager:(ZSXDemoSocketManager *)manager didCreateLocalCapturer:(RTCCameraVideoCapturer *)localCapturer{
+    // 为视频流渲染视图
+    _localVideoView = [[RTCCameraPreviewView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+    _localVideoView.captureSession = localCapturer.captureSession;
+    ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
+    ARDCaptureController *captureController =
+    [[ARDCaptureController alloc] initWithCapturer:localCapturer settings:settingsModel];
+    [captureController startCapture];
+    
 }
 
 - (void)socketManager:(ZSXDemoSocketManager *)manager closeWithUserId:(NSString *)userId{
@@ -89,6 +104,29 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)socketManager:(ZSXDemoSocketManager *)manager didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack{
+    
+//    [remoteVideoTrack removeRenderer:self.remoteVideoView];
+//    remoteVideoTrack = nil;
+    [self.remoteVideoView renderFrame:nil];
+    [remoteVideoTrack addRenderer:self.remoteVideoView];
+}
+
+- (UIView<RTCVideoRenderer> *)remoteVideoView{
+    if (!_remoteVideoView) {
+#if defined(RTC_SUPPORTS_METAL)
+        _remoteVideoView = [[RTCMTLVideoView alloc] initWithFrame:CGRectZero];
+#else
+        RTCEAGLVideoView *remoteView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectZero];
+        remoteView.delegate = self;
+        _remoteVideoView = remoteView;
+#endif
+        _remoteVideoView.frame = self.view.frame;
+        [self.view addSubview:_remoteVideoView];
+    }
+    return _remoteVideoView;
 }
 
 
