@@ -24,7 +24,7 @@
 + (instancetype)share;
 
 - (void)initRTC;
-
+- (void)createOffer;
 - (void)getMsgData:(NSData *)data;
 @property (nonatomic,weak)id <ZSXRTCManangerDelegate>delegate;
 

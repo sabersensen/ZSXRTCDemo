@@ -15,6 +15,14 @@ static NSString * const kARDAudioTrackId = @"ARDAMSa0";
 static NSString * const kARDVideoTrackId = @"ARDAMSv0";
 static NSString * const kARDVideoTrackKind = @"video";
 
+static NSString const *kRTCICECandidateTypeKey = @"type";
+static NSString const *kRTCICECandidateTypeValue = @"candidate";
+static NSString const *kRTCICECandidateMidKey = @"id";
+static NSString const *kRTCICECandidateMLineIndexKey = @"label";
+static NSString const *kRTCICECandidateSdpKey = @"candidate";
+static NSString const *kRTCICECandidatesTypeKey = @"candidates";
+
+
 @interface ZSXRTCMananger ()<RTCPeerConnectionDelegate>
 
 @property (strong, nonatomic)   RTCPeerConnectionFactory            *peerConnectionFactory;
@@ -51,12 +59,10 @@ static NSString * const kARDVideoTrackKind = @"video";
 #pragma mark Private Methods
 
 - (void)initRTC{
-    
     RTCInitializeSSL();
     [self createPeerConnection];
     [self addTrackToLocalSteam];
 //    [self.peerConnection addStream:self.localStream];
-    [self createOffer];
 }
 
 - (void)getMsgData:(NSData *)data{
@@ -64,8 +70,8 @@ static NSString * const kARDVideoTrackKind = @"video";
     NSDictionary *dicJson=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     if ([[dicJson objectForKey:@"eventName"] isEqualToString:@"__sendMsg"]){
         NSDictionary *dataDic = [dicJson objectForKey:@"data"];
-        if ([[dataDic objectForKey:@"type"] isEqualToString:@"offer"]) {
-            RTCSessionDescription *remoteSdp = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeOffer sdp:dataDic[@"sdp"]];
+        if ([[dataDic objectForKey:kRTCICECandidateTypeKey] isEqualToString:@"offer"]) {
+            RTCSessionDescription *remoteSdp = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeOffer sdp:dataDic[kRTCICECandidateSdpKey]];
             __weak ZSXRTCMananger *weakSelf = self;
             [_peerConnection setRemoteDescription:remoteSdp
                                 completionHandler:^(NSError *error) {
@@ -75,8 +81,8 @@ static NSString * const kARDVideoTrackKind = @"video";
                                 }];
             return;
         }
-        if ([[dataDic objectForKey:@"type"] isEqualToString:@"answer"]) {
-            RTCSessionDescription *remoteSdp = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeAnswer sdp:dataDic[@"sdp"]];
+        if ([[dataDic objectForKey:kRTCICECandidateTypeKey] isEqualToString:@"answer"]) {
+            RTCSessionDescription *remoteSdp = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeAnswer sdp:dataDic[kRTCICECandidateSdpKey]];
             __weak ZSXRTCMananger *weakSelf = self;
             [_peerConnection setRemoteDescription:remoteSdp
                                 completionHandler:^(NSError *error) {
@@ -86,10 +92,31 @@ static NSString * const kARDVideoTrackKind = @"video";
                                 }];
             return;
         }
-        if ([[dataDic objectForKey:@"type"] isEqualToString:@"candidate"]) {
+        if ([[dataDic objectForKey:kRTCICECandidateTypeKey] isEqualToString:@"candidate"]) {
+            RTCIceCandidate *candidate =
+            [self candidateFromJSONDictionary:dataDic];
+            ARDSignalingMessage *message = [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
+            ARDICECandidateMessage *candidateMessage =
+            (ARDICECandidateMessage *)message;
+            [_peerConnection addIceCandidate:candidateMessage.candidate];
+//            ARDICECandidateMessage *message =
+//            [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
+//            ARDICECandidateMessage *candidateMessage =
+//            (ARDICECandidateMessage *)message;
+//            [_peerConnection addIceCandidate:candidateMessage.candidate];
             return;
         }
     }
+}
+
+- (RTCIceCandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
+    NSString *mid = dictionary[kRTCICECandidateMidKey];
+    NSString *sdp = dictionary[kRTCICECandidateSdpKey];
+    NSNumber *num = dictionary[kRTCICECandidateMLineIndexKey];
+    NSInteger mLineIndex = [num integerValue];
+    return [[RTCIceCandidate alloc] initWithSdp:sdp
+                                  sdpMLineIndex:mLineIndex
+                                         sdpMid:mid];
 }
 
 /**
@@ -349,7 +376,7 @@ didChangeIceGatheringState:(RTCIceGatheringState)newState{
     }
 }
 
-/** New ice candidate has been found. */
+/** 收集到ice */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
 didGenerateIceCandidate:(RTCIceCandidate *)candidate{
     NSLog(@"didGenerateIceCandidate");

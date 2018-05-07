@@ -27,11 +27,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbE-EV-aSc">
-                                <rect key="frame" x="172" y="596" width="31" height="30"/>
+                                <rect key="frame" x="149" y="570" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="拨打"/>
+                                <state key="normal" title="创建会议室"/>
                                 <connections>
                                     <action selector="onCallClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J0N-ly-8vt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5Z-Ir-K0B">
+                                <rect key="frame" x="149" y="617" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="连接会议室"/>
+                                <connections>
+                                    <action selector="onConnectOfferClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DtO-Cw-Vwd"/>
                                 </connections>
                             </button>
                         </subviews>

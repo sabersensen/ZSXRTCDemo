@@ -34,7 +34,15 @@
     ZSXRTCMananger *rtc = [ZSXRTCMananger share];
     rtc.delegate = self;
     [rtc initRTC];
+    [rtc createOffer];
 }
+- (IBAction)onConnectOfferClick:(id)sender {
+    ZSXRTCMananger *rtc = [ZSXRTCMananger share];
+    rtc.delegate = self;
+    [rtc initRTC];
+}
+
+
 
 #pragma mark - ZSXRTCManangerDelegate
 
@@ -45,7 +53,7 @@
     ARDCaptureController *captureController =
     [[ARDCaptureController alloc] initWithCapturer:localCapturer settings:settingsModel];
     [captureController startCapture];
-    [self.view addSubview:self.localVideoView];
+    [self.view insertSubview:self.localVideoView atIndex:0];
 }
 
 - (void)RTCManager:(ZSXRTCMananger *)manager didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack{
@@ -79,7 +87,7 @@
         _remoteVideoView = remoteView;
 #endif
         _remoteVideoView.frame = self.view.frame;
-        [self.view addSubview:_remoteVideoView];
+        [self.view insertSubview:_remoteVideoView atIndex:1];
     }
     return _remoteVideoView;
 }

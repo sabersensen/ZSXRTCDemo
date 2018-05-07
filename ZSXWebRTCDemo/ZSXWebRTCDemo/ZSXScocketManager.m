@@ -9,7 +9,7 @@
 #import "ZSXScocketManager.h"
 #import "GCDAsyncSocket.h" // for TCP
 
-static  NSString * Khost = @"192.168.3.22";
+static  NSString * Khost = @"10.0.3.106";
 static const uint16_t Kport = 6969;
 static  NSString * KroomName = @"zsx";
 

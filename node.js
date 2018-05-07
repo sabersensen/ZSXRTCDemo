@@ -1,5 +1,5 @@
 var net = require('net');  
-var HOST = '192.168.3.22';  
+var HOST = '10.0.3.106';  
 var PORT = 6969;  
 
 var connections = new Array();
@@ -12,14 +12,14 @@ var twoSock = null;
 // 在每一个“connection”事件中，该回调函数接收到的socket对象是唯一的  
 net.createServer(function(sock) {  
     // 我们获得一个连接 - 该连接自动关联一个socket对象  
-    // if (!oneSock) {
-    //     oneSock = sock;
-    //     console.log('绑定1号sock');
-    // }
-    // if (sock.remoteAddress != oneSock.remoteAddress) {
-    //     twoSock = sock;
-    //     console.log('绑定2号sock');
-    // }
+    if (!oneSock) {
+        oneSock = sock;
+        console.log('绑定1号sock');
+    }
+    if (sock.remoteAddress != oneSock.remoteAddress) {
+        twoSock = sock;
+        console.log('绑定2号sock');
+    }
     console.log('CONNECTED: ' +  
         sock.remoteAddress + ':' + sock.remotePort);  
         // sock.write('服务端发出：连接成功');  
@@ -43,14 +43,14 @@ net.createServer(function(sock) {
             sock.write(JSON.stringify(peersData));
             connections.push(user);
         }else if(dataObj.eventName == "__sendMsg"){
-            // if (sock.remoteAddress != oneSock.remoteAddress) {
-            //     console.log('发送给' + oneSock.remoteAddress + ': ' + dataObj.content); 
-            //     oneSock.write(JSON.stringify(dataObj.data));
-            // }else{
-            //     console.log('发送给' + twoSock.remoteAddress + ': ' + dataObj.content);  
-            //     twoSock.write(JSON.stringify(dataObj.data));
-            // }
-            sock.write(JSON.stringify(dataObj));
+            if (sock.remoteAddress != oneSock.remoteAddress) {
+                console.log('发送给' + oneSock.remoteAddress + ': ' + dataObj.content); 
+                oneSock.write(JSON.stringify(dataObj));
+            }else{
+                console.log('发送给' + twoSock.remoteAddress + ': ' + dataObj.content);  
+                twoSock.write(JSON.stringify(dataObj));
+            }
+            // sock.write(JSON.stringify(dataObj));
 
         };
 
